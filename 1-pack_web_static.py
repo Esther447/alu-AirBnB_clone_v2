@@ -1,21 +1,12 @@
 #!/usr/bin/python3
-"""
-Fabric script to generate a .tgz archive from web_static folder.
-"""
+"""COD"""
 
 from fabric.api import local
 from datetime import datetime
 import os
 
 def do_pack():
-    """Generates a .tgz archive from the contents of the web_static folder.
-
-    The archive is stored in the versions directory and named:
-    web_static_<year><month><day><hour><minute><second>.tgz
-
-    Returns:
-        str: Archive path if successful, otherwise None.
-    """
+    """COD"""
     try:
         # Create versions directory if it doesn't exist
         if not os.path.exists("versions"):
