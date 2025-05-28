@@ -1,12 +1,17 @@
 #!/usr/bin/python3
-"""COD"""
+"""Generates a .tgz archive from the contents of the web_static folder."""
 
 from fabric.api import local
 from datetime import datetime
 import os
 
 def do_pack():
-    """COD"""
+    """
+    Create a .tgz archive from web_static folder.
+
+    Returns:
+        str: Path to the created archive if successful, None otherwise.
+    """
     try:
         # Create versions directory if it doesn't exist
         if not os.path.exists("versions"):
@@ -20,7 +25,6 @@ def do_pack():
         # Pack the folder into a .tgz archive
         print(f"Packing web_static to {archive_path}")
         result = local(f"tar -cvzf {archive_path} web_static", capture=True)
-
         if result.succeeded:
             print(f"web_static packed: {archive_path}")
             return archive_path
@@ -29,4 +33,3 @@ def do_pack():
 
     except Exception:
         return None
-
