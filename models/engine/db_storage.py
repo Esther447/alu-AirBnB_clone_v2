@@ -30,6 +30,10 @@ class DBStorage:
 
         if env == "test":
             Base.metadata.drop_all(self.__engine)
+    
+    def close(self):
+    """Remove the current SQLAlchemy session"""
+    self.__session.close()
 
     def all(self, cls=None):
         """returns a dictionary
