@@ -28,7 +28,8 @@ def c(text):
 def python(text="is cool"):
     """Displays Python followed by value of text (default: is cool)"""
     text = text.replace('_', ' ')
-    return "Python {}".format(text)
+    response = "Python {}".format(text)
+    return response
 
 
 if __name__ == "__main__":
