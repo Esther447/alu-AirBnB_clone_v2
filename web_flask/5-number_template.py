@@ -2,8 +2,8 @@
 """
 5-number_template.py
 
-Starts a Flask web application with several routes, including one that renders
-an HTML page if a number is provided.
+Starts a Flask web application with multiple routes,
+including one that displays a number in a template.
 """
 
 from flask import Flask, render_template
@@ -12,41 +12,41 @@ app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_hbnb():
-    """Route '/' that returns 'Hello HBNB!'"""
+def hello():
+    """Returns a greeting message"""
     return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """Route '/hbnb' that returns 'HBNB'"""
+    """Returns a short message"""
     return "HBNB"
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def c_route(text):
-    """Displays 'C <text>' with underscores replaced by spaces"""
-    return "C " + text.replace('_', ' ')
+def c_text(text):
+    """Displays C followed by text"""
+    return "C {}".format(text.replace("_", " "))
 
 
 @app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_route(text="is cool"):
-    """Displays 'Python <text>' with underscores replaced by spaces"""
-    return "Python " + text.replace('_', ' ')
+def python_text(text="is cool"):
+    """Displays Python followed by text"""
+    return "Python {}".format(text.replace("_", " "))
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
-    """Displays '<n> is a number' only if n is an integer"""
+    """Displays that n is a number if it's an int"""
     return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
-    """Displays an HTML page only if n is an integer"""
-    return render_template('5-number.html', n=n)
+    """Renders an HTML template if n is an integer"""
+    return render_template("5-number.html", n=n)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
