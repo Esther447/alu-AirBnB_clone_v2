@@ -20,14 +20,14 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
-    """Displays 'C ' followed by the text variable (underscores replaced with space)"""
+    """Displays variable (underscores replaced with space)"""
     return "C {}".format(text.replace("_", " "))
 
 
 @app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
-    """Displays 'Python ' followed by the text variable (underscores replaced with space)"""
+    """Displays 'Python ' (underscores replaced with space)"""
     return "Python {}".format(text.replace("_", " "))
 
 
@@ -39,7 +39,7 @@ def number(n):
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
-    """Displays a HTML page only if n is an integer"""
+    """Displays an HTML page with the number if it is an integer"""
     return render_template('5-number.html', n=n)
 
 
