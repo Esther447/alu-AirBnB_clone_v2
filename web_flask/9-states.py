@@ -1,32 +1,31 @@
 #!/usr/bin/python3
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>HBNB</title>
-</head>
-<body>
+"""Starts a Flask web application with states and cities"""
 
-{% if all_states %}
-    <h1>States</h1>
-    <ul>
-    {% for state in states %}
-        <li>{{ state.id }}: <b>{{ state.name }}</b></li>
-    {% endfor %}
-    </ul>
+from flask import Flask, render_template
+from models import storage
+from models.state import State
 
-{% elif state %}
-    <h1>State: {{ state.name }}</h1>
-    <h3>Cities:</h3>
-    <ul>
-    {% for city in cities %}
-        <li>{{ city.id }}: <b>{{ city.name }}</b></li>
-    {% endfor %}
-    </ul>
+app = Flask(__name__)
 
-{% else %}
-    <h1>Not found!</h1>
-{% endif %}
+@app.teardown_appcontext
+def teardown_db(exception):
+    """Remove current SQLAlchemy session after each request"""
+    storage.close()
 
-</body>
-</html>
+@app.route('/states', strict_slashes=False)
+@app.route('/states/<id>', strict_slashes=False)
+def states(id=None):
+    """Display a page with all states or one state with its cities"""
+    states = storage.all(State).values()
+    states = sorted(states, key=lambda state: state.name)
+
+    if id:
+        for state in states:
+            if state.id == id:
+                return render_template('9-states.html', state=state, all_states=False)
+        return render_template('9-states.html', state=None, all_states=False)
+
+    return render_template('9-states.html', states=states, all_states=True)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
