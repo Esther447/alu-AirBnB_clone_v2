@@ -7,10 +7,12 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.teardown_appcontext
 def teardown_db(exception):
     """Remove current SQLAlchemy session after each request"""
     storage.close()
+
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
@@ -18,6 +20,7 @@ def states(id=None):
     """Display a page with all states or one state with its cities"""
     states = storage.all(State).values()
     states = sorted(states, key=lambda state: state.name)
+
 
     if id:
         for state in states:
