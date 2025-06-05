@@ -22,7 +22,9 @@ def states(id=None):
     if id:
         for state in states:
             if state.id == id:
-                return render_template('9-states.html', state=state, all_states=False)
+                return render_template(
+                    '9-states.html', state=state, all_states=False
+                )
         return render_template('9-states.html', state=None, all_states=False)
 
     return render_template('9-states.html', states=states, all_states=True)
