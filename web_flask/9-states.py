@@ -23,13 +23,24 @@ def states(id=None):
 
     if id:
         for state in states:
-            if state.id == id:
-                return render_template('9-states.html',
-state=state, all_states=False)
-        return render_template('9-states.html',
-state=None, all_states=False)
+                if state:
+        return render_template(
+            '9-states.html',
+            state=state,
+            all_states=False
+        )
+    return render_template(
+        '9-states.html',
+        state=None,
+        all_states=False
+    )
 
-    return render_template('9-states.html', states=states, all_states=True)
+return render_template(
+    '9-states.html',
+    states=states,
+    all_states=True
+)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
