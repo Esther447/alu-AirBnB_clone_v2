@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 <!DOCTYPE html>
 <html lang="en">
 <head>
